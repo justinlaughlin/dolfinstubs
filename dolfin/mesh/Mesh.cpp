@@ -150,7 +150,7 @@ std::size_t Mesh::init(std::size_t dim) const
     //Do not display empty mesh warning if we are dealing with submeshes
     if(_topology.mapping().empty())
       warning("Mesh is empty, unable to create entities of dimension %d.", dim);
-    return 0;
+    return 99;
   }
 
   // Skip if already computed
