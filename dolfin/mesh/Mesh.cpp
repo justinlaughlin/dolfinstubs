@@ -574,9 +574,12 @@ void Mesh::build_mapping(std::shared_ptr<const Mesh> other) const
                   other->topology().dim(), this->topology().dim());
 
     if(!new_idx_found)
-      std::cout << "Error in building the mapping ("
-		<< this->id() << ", " << other->id() << ") :"
-		<< "Index not found." << std::endl;
+      // jgl: Fill new_cell_map[i] with a nan value
+      new_cell_map[i] = std::numeric_limits<std::size_t>::max();
+      // jgl: Commenting this out because we have many meshes where a subsurface is a superset of the boundary of an adjacent subvolume
+    //   std::cout << "Error in building the mapping ("
+		// << this->id() << ", " << other->id() << ") :"
+		// << "Index not found." << std::endl;
   }
   this->_topology.add_mapping(std::make_pair(other->id(), std::make_shared<MeshView>(other, new_vertex_map, new_cell_map)));
 }
